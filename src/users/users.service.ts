@@ -12,4 +12,22 @@ export class UsersService {
   async createUser(data: { name: string; email: string; notes?: string }) {
     return this.prismaService.user.create({ data });
   }
+
+  async getUserBookingsById(id: number) {
+    return this.prismaService.user.findUnique({ where: { id } }).bookings();
+  }
+
+  async getUserOrCreateNew(data: {
+    name: string;
+    email: string;
+    notes?: string;
+  }) {
+    const user = await this.prismaService.user.findFirst({
+      where: { email: data.email },
+    });
+    if (user) {
+      return user;
+    }
+    return this.prismaService.user.create({ data });
+  }
 }

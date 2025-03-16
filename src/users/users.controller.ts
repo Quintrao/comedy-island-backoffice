@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Param, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -12,6 +12,24 @@ export class UsersController {
       return 'No users found';
     }
     return users;
+  }
+
+  @Get('user-bookings/:id')
+  async getUserBookingsById(@Param('id') id: string) {
+    const idNumber = parseInt(id, 10);
+    if (!idNumber) {
+      const allUsers = await this.usersService.getAllUsers();
+      const allUsersWithBookings = allUsers.map(async (user) => {
+        const bookings = await this.usersService.getUserBookingsById(user.id);
+        return { ...user, bookings };
+      });
+      return allUsersWithBookings;
+    }
+    const bookings = await this.usersService.getUserBookingsById(idNumber);
+    return {
+      bookings,
+      bookingsCount: bookings.length,
+    };
   }
 
   @Post('create-dummy-user')
