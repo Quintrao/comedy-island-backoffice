@@ -1,4 +1,5 @@
 @host = http://localhost:8080
+#@host = https://comedy-island-backoffice.fly.dev
 
 ### HOME
 {{host}}
