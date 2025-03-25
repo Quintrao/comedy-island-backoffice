@@ -1,15 +1,12 @@
-# fly.toml app configuration file generated for comedy-island-backoffice-o2hyeq on 2025-03-25T16:36:47Z
+# fly.toml app configuration file generated for comedy-island-backoffice on 2025-03-25T17:56:26Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'comedy-island-backoffice-o2hyeq'
+app = 'comedy-island-backoffice'
 primary_region = 'fra'
 
 [build]
-
-[deploy]
-  release_command = 'npx prisma migrate deploy'
 
 [http_service]
   internal_port = 8080
