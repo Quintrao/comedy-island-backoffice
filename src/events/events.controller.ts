@@ -45,7 +45,6 @@ export class EventsController {
   createEvent(
     @Body() data: { title: string; description: string; date: Date },
   ) {
-    console.log(data, 'data');
     return this.eventsService.createEvent(data);
   }
 }

@@ -1,28 +1,31 @@
-http://localhost:3000
+@host = http://localhost:8080
+
+### HOME
+{{host}}
 
 ### USERS
-http://localhost:3000/users
+{{host}}/users
 
 ###
-http://localhost:3000/users/user-bookings/2
+{{host}}/users/user-bookings/2
 
 ###
-POST http://localhost:3000/users/create-dummy-user
+POST {{host}}/users/create-dummy-user
 
 ### EVENTS
-http://localhost:3000/events
+{{host}}/events
 
 ###
-http://localhost:3000/events/event-bookings
+{{host}}/events/event-bookings
 
 ###
-http://localhost:3000/events/event-bookings/1
+{{host}}/events/event-bookings/1
 
 ###
-POST http://localhost:3000/events/create-dummy-event
+POST {{host}}/events/create-dummy-event
 
 ###
-POST http://localhost:3000/events/create-event
+POST {{host}}/events/create-event
 Content-Type: application/json
 
 {
@@ -32,7 +35,7 @@ Content-Type: application/json
 }
 
 ### BOOKINGS
-POST http://localhost:3000/bookings/create-booking-by-user-email
+POST {{host}}/bookings/create-booking-by-user-email
 Content-Type: application/json
 
 {
