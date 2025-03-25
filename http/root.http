@@ -4,7 +4,6 @@ http://localhost:3000
 http://localhost:3000/users
 
 ###
-
 http://localhost:3000/users/user-bookings/2
 
 ###
@@ -14,17 +13,30 @@ POST http://localhost:3000/users/create-dummy-user
 http://localhost:3000/events
 
 ###
+http://localhost:3000/events/event-bookings
+
+###
 http://localhost:3000/events/event-bookings/1
 
 ###
 POST http://localhost:3000/events/create-dummy-event
 
 ###
+POST http://localhost:3000/events/create-event
+Content-Type: application/json
+
+{
+  "title": "Event 1",
+  "description": "Event 1 description",
+  "date": "2021-09-01T00:00:00.000Z"
+}
+
+### BOOKINGS
 POST http://localhost:3000/bookings/create-booking-by-user-email
 Content-Type: application/json
 
 {
-  "name": "John Doe",
-  "email": "some@email1.com",
-  "eventId": 1
+  "name": "Jane Doe",
+  "email": "some@email4.com",
+  "eventId": 4
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { EventsService } from './events.service';
 
 @Controller('events')
@@ -14,6 +14,24 @@ export class EventsController {
     return events;
   }
 
+  @Get('event-bookings')
+  async getEventBookings() {
+    return this.eventsService.getAllEventsWithBookings();
+  }
+
+  @Get('event-bookings/:id')
+  async getEventBookingsById(@Param('id') id: string) {
+    const idNumber = parseInt(id, 10);
+    if (!idNumber) {
+      return this.eventsService.getAllEventsWithBookings();
+    }
+    const bookings = await this.eventsService.getEventBookingsById(idNumber);
+    return {
+      bookings,
+      bookingsCount: bookings.length,
+    };
+  }
+
   @Post('create-dummy-event')
   createDummyEvent() {
     return this.eventsService.createEvent({
@@ -23,26 +41,11 @@ export class EventsController {
     });
   }
 
-  @Get('event-bookings/:id')
-  async getEventBookingsById(@Param('id') id: string) {
-    const idNumber = parseInt(id, 10);
-    if (!idNumber) {
-      const allEvents = await this.eventsService.getAllEvents();
-      const allEventsWithBookings = allEvents.map(async (event) => {
-        const bookings = await this.eventsService.getEventBookingById(event.id);
-        return { ...event, bookings };
-      });
-      return allEventsWithBookings;
-    }
-    const bookings = await this.eventsService.getEventBookingById(idNumber);
-    return {
-      bookings,
-      bookingsCount: bookings.length,
-    };
-  }
-
   @Post('create-event')
-  createEvent(data: { title: string; description: string; date: Date }) {
+  createEvent(
+    @Body() data: { title: string; description: string; date: Date },
+  ) {
+    console.log(data, 'data');
     return this.eventsService.createEvent(data);
   }
 }
